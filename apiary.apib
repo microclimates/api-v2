@@ -96,6 +96,7 @@ id=some-resource-id&name=Resource%20Name
 
 **access-control-allow-origin** - Set to `*` to allow cross domain browser requests.  
 **content-encoding** - Supplied if the content was encoded, as requested by the `accept-encoding` request header.  
+**content-length** - Byte count of the content body  
 **content-type** - The content type response. Usually `appliction/json; charset-utf-8`  
 **date** - The timestamp that the request arrived  
 **etag** - A unique code representing the response. Used in conjunction with the `if-none-match` request header.  
@@ -113,20 +114,23 @@ On unsuccessful API call (status code 400 or higher), the body contains error in
 # Users [/api/v2/users]
 User - *An individual that interacts with the system*
 
-## Read a user profile [GET /{id}]
+## Read a user profile [GET /api/v2/users/{id}]
 
 Returns the profile for the specified user ID. 
+
++ Parameters
+    + id (string) - The user resource id
 + Response 200 (application/json)
     + Attributes (User)
 
-## Read user profiles [GET]
+## Read user profiles [GET /api/v2/users]
 
 Returns an array of user profiles. This will return a single user profile of the user making the request. It's useful if you have an Authorization token, but don't have the user ID.
 + Response 200 (application/json)
     + Attributes (Users)
 
 
-## Update a user profile [PUT /{id}]
+## Update a user profile [PUT /api/v2/users/{id}]
 
 Updates your user profile. Most attributes can be updated, but not all. The `body` can contain 
 a subset of attributes to update, or all attributes.
@@ -137,7 +141,7 @@ The resource /{id} must be the ID associated with the Authentication token.
 + Response 200 (application/json)
     + Attributes (User)
 
-## Delete a user [DELETE /{id}]
+## Delete a user [DELETE /api/v2/users/{id}]
 
 **Be really careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
