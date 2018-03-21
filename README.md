@@ -1,12 +1,14 @@
-# Climate Control API v2
+# Using the API
 
-Documentation repository for the Microclimates *Climate Control API v2*
+Active API testing portal:
 
-Editing can be done locally or in the Apiary editor:
+  [https://microclimates.docs.apiary.io](https://microclimates.docs.apiary.io)
 
-  https://app.apiary.io/microclimates/editor
+The document below is copied from the [apiary.apib](https://github.com/microclimates/api-v2/blob/master/apiary.apib) file in this repository.
 
-FORMAT: 1A
+---
+
+FORMAT: 1A  
 HOST: https://microclimates.com
 
 # Climate Conrol API
