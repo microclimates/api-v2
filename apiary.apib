@@ -1,0 +1,39 @@
+FORMAT: 1A
+HOST: https://microclimates.com
+# Basic ACME Blog API
+Welcome to the **ACME Blog** API. This API provides access to the **ACME Blog** service.
+# Another heading
+Some other introductory stuff
+# Group Blog Posts
+## Posts [GET /api/post]
++ Response 200 (application/json)
+    + Body
+    
+            [
+                {
+                    "id": 1,
+                    "title": "foo title",
+                    "body": "bar body",
+                    "author": 1
+                }
+            ]
+
+# Group Something else
+But is this not just a plain doc?
+
+At the moment, yes, but let’s see how we can use other tools to add more value to our developing process.
+
+API Blueprint and dredd
+
+https://github.com/apiaryio/dredd
+Dredd is a language-agnostic command-line tool for validating API description document against backend implementation of the API.
+Yes, you are reading fine. Blueprint not only allows you to write the documentation/specification of your API but also it works as set of tests that could be executed by other tools like “dredd” to check if every endpoint is working as it should be.
+
+Getting started with dredd:
+The first thing you need to do is install dredd using node:
+
+// Globally install
+npm install -g dredd
+// Local install
+npm install — save-dev dredd
+Now we can start creating our API specification by creating an API-description.apib file in the root of the project (apib stands for API blueprint file).
