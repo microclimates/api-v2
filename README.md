@@ -147,6 +147,8 @@ a subset of attributes to update, or all attributes.
 
 The resource /{id} must be the ID associated with the Authentication token.
 
++ Parameters
+    + id (string) - The user resource id
 + Attributes (User)
 + Response 200 (application/json)
     + Attributes (User)
@@ -159,6 +161,8 @@ API keys will be different, even if you're invited with the same email address.
 
 The resource /{id} must be the ID associated with the Authentication token.
 
++ Parameters
+    + id (string) - The user resource id
 + Response 200 (application/json)
 
 # Data Structures
