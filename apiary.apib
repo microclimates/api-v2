@@ -4,7 +4,7 @@ HOST: https://microclimates.com
 # Climate Conrol API
 
 The Microclimates Climate Control API allows developers to interact with Microclimates sites
-from the context of a user.
+and devices from the context of a user.
 
 It offers all functionality used in the Microclimates UI, and additional
 items for posting and retrieving device data.
@@ -30,7 +30,7 @@ data is passed in the request/response body, as to not get logged during server 
 If you feel your API token has been compromised, the  token can be revoked and replaced
 with a new token from within the Microclimates application.
 
-# HTTP Request
+# HTTP Requests
 
 The following sections of the HTTP request are handled the same for each API interaction.
 
@@ -57,7 +57,7 @@ The following request headers are recognized
 The format of data supplied in the request body is based on the `Content-Type` header
  (see above).
 
-### Example: applicaton/json
+**Example: applicaton/json**
 ```
 {
     "id": "some-resource-id",
@@ -68,28 +68,26 @@ The format of data supplied in the request body is based on the `Content-Type` h
 
 JSON data may be, but is not required to be pretty printed as in the above example.
 
-### Example: application/x-www-form-urlencoded
+**Example: application/x-www-form-urlencoded**
 ```
 id=some-resource-id&name=Resource%20Name
 ```
 
-# HTTP Response
+# HTTP Responses
 
 ## Status Codes
 
-### Success Codes
+**The following codes indicate success:**
 
 `200 - OK` Everything went according to plan, and the results are as documented.  
 `304 - Not Modified` No body returned. Used in conjunction with the ETag header (above)  
 
-### Error Codes
+**The following codes indicate an error.** They return an error body vs. the documented body, for the following reasons
 
-The following codes return an error body vs. the documented body, for the following reasons
-
-`400 - Bad Request` The request is not valid and was rejected. Reason in the body.  
+`400 - Bad Request` The request fails a precondition and was rejected. Reason indicated in the body.  
 `401 - Unauthorized` Authorization header not supplied, or supplied with an invalid token.  
 `404 - Not Found` The resource requested by ID is not found in the system.  
-`500 - Internal Server Error` Oh crap. Something bad happened on our end. You might find something useful in the response body.  
+`500 - Internal Server Error` Oh crap - something bad happened on our end. You might find something useful in the response body.  
 `501 - Not Implemented` Coming soon to an API near you.  
 
 ## Response Headers
@@ -102,20 +100,23 @@ On successful API call, the body is as documented.
 
 On unsuccessful API call (status code 400 or higher), the body contains error information.
 
-# Group Users [/api/v2/users]
+# Users [/api/v2/users]
 User - An individual that interacts with the system
 
 ## Read Users [GET]
 
-This is a standard GET, meaning it returns an array of resources, but there should only be a single item
-in the array - the user specified by the API token.
+This is a standard GET, meaning it returns an array of resources, but there will only be one item
+in the array - the user specified by the Authentication token.
 
 + Response 200 (application/json)
     + Attributes (User)
 
 ## Update a User [PUT /{id}]
 
-Updates user profile. Most attributes can be updated, only updated attributes need to be given in the body.
+Updates your user profile. Most attributes can be updated, but not all. The `body` can contain 
+a subset of attributes to update, or all attributes.
+
+The resource /{id} must be the ID associated with the Authentication token.
 
 + Attributes (User)
 + Response 200 (application/json)
@@ -123,9 +124,11 @@ Updates user profile. Most attributes can be updated, only updated attributes ne
 
 ## Delete a User [DELETE /{id}]
 
-`Be really careful with this one.` If you delete yourself, that will be the last API call you're
+**Be really careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
 API keys will be different, even if you're invited with the same email address.
+
+The resource /{id} must be the ID associated with the Authentication token.
 
 + Response 200 (application/json)
 
