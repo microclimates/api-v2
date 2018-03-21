@@ -1,0 +1,25 @@
+{
+  "name": "climate-control-api",
+  "version": "2.0.0",
+  "description": "API Documentation",
+  "author": "Loren West <open_source@lorenwest.com>",
+  "homepage": "https://microclimates.docs.apiary.io/#",
+  "keywords": [
+    "climate control",
+    "climate",
+    "api",
+    "microclimates"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "dredd": "^5.1.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/microclimates/api-v2.git"
+  },
+  "scripts": {
+    "test": ""
+  }
+}
