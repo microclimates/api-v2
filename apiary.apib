@@ -103,29 +103,41 @@ On successful API call, the body is as documented.
 On unsuccessful API call (status code 400 or higher), the body contains error information.
 
 # Group Users [/api/v2/users]
-
-## Create a User [POST]
-+ Response 200 (application/json)
-    + Attributes (User)
+User - An individual that interacts with the system
 
 ## Read Users [GET]
+
+This is a standard GET, meaning it returns an array of resources, but there should only be a single item
+in the array - the user specified by the API token.
+
 + Response 200 (application/json)
     + Attributes (User)
 
 ## Update a User [PUT /{id}]
+
+Updates user profile. Most attributes can be updated, only updated attributes need to be given in the body.
+
 + Attributes (User)
 + Response 200 (application/json)
     + Attributes (User)
 
 ## Delete a User [DELETE /{id}]
+
+`Be really careful with this one.` If you delete yourself, that will be the last API call you're
+able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
+API keys will be different, even if you're invited with the same email address.
+
 + Response 200 (application/json)
 
 # Data Structures
 
 ## User (object)
-+ percent_off: 25 (number)
 
-    A positive integer between 1 and 100 that represents the discount the
-    coupon will apply.
++ id (string)
+    The unique user identifier, used in subsequent PUT or DELETE calls.
 
-+ redeem_by (number) - Date after which the coupon can no longer be redeemed
++ firstName (string)
+    First Name
+
++ lastName (string)
+    Last Name
