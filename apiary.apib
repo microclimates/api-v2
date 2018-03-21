@@ -21,16 +21,16 @@ application.
 
 # Security
 
-The API processes only HTTPS requests to `https://microclimates.com/api/v2`, securing the content from
+The API processes only HTTPS requests, securing the content from
 observation while traveling over the network. 
 
 The resource ID and request parameters may be part of the URL, but all resource
-data is passed in the request/response body, as to not get logged during server request logging. 
+data is passed in the request/response body, as to not get logged on the server. 
 
 If you feel your API token has been compromised, the  token can be revoked and replaced
-with a new token from within the Microclimates application.
+within the Microclimates application.
 
-# HTTP Requests
+# Requests
 
 The following sections of the HTTP request are handled the same for each API interaction.
 
@@ -38,21 +38,21 @@ The following sections of the HTTP request are handled the same for each API int
 
 The request URL is made with the following parts, in order
 
-Scheme: `https://`  
-Server: `microclimates.com`  
-API Path: `/api/v2`  
-Resource Type: `/{resource type}`  
-Resource ID: `/{resource id}` (not used for `POST`)  
-Query Parameters: `?param1=value1&param2=value2` (specialized for queries)
+**Scheme** - `https://`  
+**Server** - `microclimates.com`  
+**API Path** - `/api/v2`  
+**Resource Type** - `/{resource type}`  
+**Resource ID** - `/{resource id}` (not used for *POST*)  
+**Query Parameters** - `?param1=value1&param2=value2` (specialized for queries)
 
 ## Request Headers
 
 The following request headers are recognized
 
-`authorization` - (see Authorization section above)  
-`content-type` - Describes the format of the content body one of `application/json` or `application/x-www-form-urlencoded`  
-`accept-encoding` - Supplied if your client accepts gzip, deflate, etc. encoding  
-`if-none-match` - Supplied on `GET` requests if you want a `304` response instead of the response body if the body hasn't changed. The value is that of a prior `etag` response header value.
+**authorization** - (see Authorization section above)  
+**content-type** - Describes the format of the content body one of `application/json` or `application/x-www-form-urlencoded`  
+**accept-encoding** - Supplied if your client accepts gzip, deflate, etc. encoding  
+**if-none-match** - Supplied on *GET* requests if you want a `304` response instead of the response body if the body hasn't changed. The value is that of a prior `etag` response header value.
 
 ## Content Body
 
@@ -75,34 +75,34 @@ JSON data may be, but is not required to be pretty printed as in the above examp
 id=some-resource-id&name=Resource%20Name
 ```
 
-# HTTP Responses
+# Responses
 
 ## Status Codes
 
 **The following codes indicate success:**
 
-`200 - OK` Everything went according to plan, and the results are as documented.  
-`304 - Not Modified` No body returned. Used in conjunction with the ETag header (above)  
+**200** *OK* - Everything went according to plan, and the results are as documented.  
+**304** *Not Modified* - No body returned. Used in conjunction with the ETag header (above)  
 
 **The following codes indicate an error.** They return an error body vs. the documented body, for the following reasons
 
-`400 - Bad Request` The request fails a precondition and was rejected. Reason indicated in the body.  
-`401 - Unauthorized` Authorization header not supplied, or supplied with an invalid token.  
-`404 - Not Found` The resource requested by ID is not found in the system.  
-`500 - Internal Server Error` Oh crap - something bad happened on our end. You might find something useful in the response body.  
-`501 - Not Implemented` Coming soon to an API near you.  
+**400** *Bad Request* - The request fails a precondition and was rejected. Reason indicated in the body.  
+**401** *Unauthorized* - Authorization header not supplied, or supplied with an invalid token.  
+**404** *Not Found* - The resource requested by ID is not found in the system.  
+**500** *Internal Server Error* - Oh crap - something bad happened on our end. You might find something useful in the response body.  
+**501** *Not Implemented* - Coming soon to an API near you.  
 
 ## Response Headers
 
-`access-control-allow-origin` Set to `*` to allow cross domain browser requests.  
-`content-encoding` Supplied if the content was encoded, as requested by the `accept-encoding` request header.  
-`content-type` The content type response. Usually `appliction/json; charset-utf-8`  
-`date` The timestamp that the request arrived
-`etag` A unique code representing the response. Used in conjunction with the `if-none-match` request header.  
-`status` The status code response
-`vary` A value that may be useful for network caches  
-`x-request-id` A unique identifier for this request. If a request fails, this can be used to help trace the problem from server logs.
-`x-response-time` The amount of time this request took for the server to process.
+**access-control-allow-origin** - Set to `*` to allow cross domain browser requests.  
+**content-encoding** - Supplied if the content was encoded, as requested by the `accept-encoding` request header.  
+**content-type** - The content type response. Usually `appliction/json; charset-utf-8`  
+**date** - The timestamp that the request arrived  
+**etag** - A unique code representing the response. Used in conjunction with the `if-none-match` request header.  
+**status** - The status code response  
+**vary** - A value that may be useful for network caches  
+**x-request-id** - A unique identifier for this request. If a request fails, this can be used to help trace the problem from server logs.  
+**x-response-time** - The amount of time this request took for the server to process.
 
 ## Response Body
 
@@ -111,7 +111,7 @@ On successful API call, the body is as documented.
 On unsuccessful API call (status code 400 or higher), the body contains error information.
 
 # Users [/api/v2/users]
-User - An individual that interacts with the system
+User - *An individual that interacts with the system*
 
 ## Read Users [GET]
 
