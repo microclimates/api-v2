@@ -113,15 +113,20 @@ On unsuccessful API call (status code 400 or higher), the body contains error in
 # Users [/api/v2/users]
 User - *An individual that interacts with the system*
 
-## Read Users [GET]
+## Read a user profile [GET /{id}]
 
-This is a standard GET, meaning it returns an array of resources, but there will only be one item
-in the array - the user specified by the Authentication token.
-
+Returns the profile for the specified user ID. 
 + Response 200 (application/json)
     + Attributes (User)
 
-## Update a User [PUT /{id}]
+## Read user profiles [GET]
+
+Returns an array of user profiles. This will return a single user profile of the user making the request. It's useful if you have an Authorization token, but don't have the user ID.
++ Response 200 (application/json)
+    + Attributes (Users)
+
+
+## Update a user profile [PUT /{id}]
 
 Updates your user profile. Most attributes can be updated, but not all. The `body` can contain 
 a subset of attributes to update, or all attributes.
@@ -132,7 +137,7 @@ The resource /{id} must be the ID associated with the Authentication token.
 + Response 200 (application/json)
     + Attributes (User)
 
-## Delete a User [DELETE /{id}]
+## Delete a user [DELETE /{id}]
 
 **Be really careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
@@ -145,10 +150,12 @@ The resource /{id} must be the ID associated with the Authentication token.
 # Data Structures
 
 ## User (object)
-+ id (string)
++ id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
     The unique user identifier, used in subsequent PUT or DELETE calls.
 
-+ firstName (string)
++ firstName: `John` (string, required)
     First Name
 
-+ lastName (string)
++ lastName: `Jones` (string)
+
+## Users (array [User])
