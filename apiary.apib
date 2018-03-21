@@ -1,39 +1,131 @@
 FORMAT: 1A
 HOST: https://microclimates.com
-# Basic ACME Blog API
-Welcome to the **ACME Blog** API. This API provides access to the **ACME Blog** service.
-# Another heading
-Some other introductory stuff
-# Group Blog Posts
-## Posts [GET /api/post]
+
+# Climate Conrol API
+
+The Microclimates Climate Control API allows developers to interact with Microclimates sites
+from the context of a user.
+
+It offers all functionality used in the Microclimates UI, and additional
+items for posting and retrieving device data.
+
+# Authorization
+
+All API interactions must be authorized by passing
+the user authentication token in the HTTP Authorization header.
+```
+Authorization: Bearer {token}
+```
+This token is available in the User Settings section within the Microclimates 
+application.
+
+# Security
+
+The API processes only HTTPS requests to `https://microclimates.com/api/v2`, securing the content from
+observation while traveling over the network. 
+
+The resource ID and request parameters may be part of the URL, but all resource
+data is passed in the request/response body, as to not get logged during server request logging. 
+
+If you feel your API token has been compromised, the  token can be revoked and replaced
+with a new token from within the Microclimates application.
+
+# HTTP Request
+
+The following sections of the HTTP request are handled the same for each API interaction.
+
+## Request URL
+
+The request URL is made with the following parts, in order
+
+Scheme: `https://`  
+Server: `microclimates.com`  
+API Path: `/api/v2`  
+Resource Type: `/{resource type}`  
+Resource ID: `/{resource id}` (not used for `POST`)  
+Query Parameters: `?param1=value1&param2=value2` (specialized for queries)
+
+## Request Headers
+
+The following request headers are recognized
+
+`Authorization` - (see Authorization section above)  
+`Content-Type` - Describes the format of the content body one of `application/json` or `application/x-www-form-urlencoded`  
+
+## Content Body
+
+The format of data supplied in the request body is based on the `Content-Type` header
+ (see above).
+
+### Example: applicaton/json
+```
+{
+    "id": "some-resource-id",
+    "name":"Resource Name",
+    ...
+}
+```
+
+JSON data may be, but is not required to be pretty printed as in the above example.
+
+### Example: application/x-www-form-urlencoded
+```
+id=some-resource-id&name=Resource%20Name
+```
+
+# HTTP Response
+
+## Status Codes
+
+### Success Codes
+
+`200 - OK` Everything went according to plan, and the results are as documented.  
+`304 - Not Modified` No body returned. Used in conjunction with the ETag header (above)  
+
+### Error Codes
+
+The following codes return an error body vs. the documented body, for the following reasons
+
+`400 - Bad Request` The request is not valid and was rejected. Reason in the body.  
+`401 - Unauthorized` Authorization header not supplied, or supplied with an invalid token.  
+`404 - Not Found` The resource requested by ID is not found in the system.  
+`500 - Internal Server Error` Oh crap. Something bad happened on our end. You might find something useful in the response body.  
+`501 - Not Implemented` Coming soon to an API near you.  
+
+## Response Headers
+
+
+
+## Response Body
+
+On successful API call, the body is as documented. 
+
+On unsuccessful API call (status code 400 or higher), the body contains error information.
+
+# Group Users [/api/v2/users]
+
+## Create a User [POST]
 + Response 200 (application/json)
-    + Body
-    
-            [
-                {
-                    "id": 1,
-                    "title": "foo title",
-                    "body": "bar body",
-                    "author": 1
-                }
-            ]
+    + Attributes (User)
 
-# Group Something else
-But is this not just a plain doc?
+## Read Users [GET]
++ Response 200 (application/json)
+    + Attributes (User)
 
-At the moment, yes, but let’s see how we can use other tools to add more value to our developing process.
+## Update a User [PUT /{id}]
++ Attributes (User)
++ Response 200 (application/json)
+    + Attributes (User)
 
-API Blueprint and dredd
+## Delete a User [DELETE /{id}]
++ Response 200 (application/json)
 
-https://github.com/apiaryio/dredd
-Dredd is a language-agnostic command-line tool for validating API description document against backend implementation of the API.
-Yes, you are reading fine. Blueprint not only allows you to write the documentation/specification of your API but also it works as set of tests that could be executed by other tools like “dredd” to check if every endpoint is working as it should be.
+# Data Structures
 
-Getting started with dredd:
-The first thing you need to do is install dredd using node:
+## User (object)
++ percent_off: 25 (number)
 
-// Globally install
-npm install -g dredd
-// Local install
-npm install — save-dev dredd
-Now we can start creating our API specification by creating an API-description.apib file in the root of the project (apib stands for API blueprint file).
+    A positive integer between 1 and 100 that represents the discount the
+    coupon will apply.
+
++ redeem_by (number) - Date after which the coupon can no longer be redeemed
