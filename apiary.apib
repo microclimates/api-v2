@@ -49,8 +49,10 @@ Query Parameters: `?param1=value1&param2=value2` (specialized for queries)
 
 The following request headers are recognized
 
-`Authorization` - (see Authorization section above)  
-`Content-Type` - Describes the format of the content body one of `application/json` or `application/x-www-form-urlencoded`  
+`authorization` - (see Authorization section above)  
+`content-type` - Describes the format of the content body one of `application/json` or `application/x-www-form-urlencoded`  
+`accept-encoding` - Supplied if your client accepts gzip, deflate, etc. encoding  
+`if-none-match` - Supplied on `GET` requests if you want a `304` response instead of the response body if the body hasn't changed. The value is that of a prior `etag` response header value.
 
 ## Content Body
 
@@ -92,7 +94,15 @@ id=some-resource-id&name=Resource%20Name
 
 ## Response Headers
 
-
+`access-control-allow-origin` Set to `*` to allow cross domain browser requests.  
+`content-encoding` Supplied if the content was encoded, as requested by the `accept-encoding` request header.  
+`content-type` The content type response. Usually `appliction/json; charset-utf-8`  
+`date` The timestamp that the request arrived
+`etag` A unique code representing the response. Used in conjunction with the `if-none-match` request header.  
+`status` The status code response
+`vary` A value that may be useful for network caches  
+`x-request-id` A unique identifier for this request. If a request fails, this can be used to help trace the problem from server logs.
+`x-response-time` The amount of time this request took for the server to process.
 
 ## Response Body
 
