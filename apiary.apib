@@ -179,13 +179,14 @@ The resource /{userId} must be the ID associated with the Authentication token.
 + Response 200
 
 # Sites [/api/v2/sites]
-Site - *A physical installation with managed devices*
+Site - *A physical installation with managed devices.* All sites are associated with a *site server*,
+responsible for managing devices, users, and security for the location.
 
 ## Read available sites [GET /api/v2/sites]
 
 Returns all sites authorized for the user, as specified in the Authorization token.
 
-This request is served without directly contacting the sites.
+This request is served without directly contacting the site servers.
 
 + Request
     + Headers
@@ -196,7 +197,7 @@ This request is served without directly contacting the sites.
 
 ## Read site information [GET /api/v2/sites/{siteId}]
 
-Returns site details for the user. This request is served by the site.
+Returns site details for the user. This request is made to the site server.
 
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
