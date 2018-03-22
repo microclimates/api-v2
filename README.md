@@ -129,16 +129,23 @@ User - *An individual that interacts with the system*
 Returns the profile for the specified user ID. 
 
 + Parameters
-    + id (string) - The user resource id
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (User)
 
 ## Read user profiles [GET /api/v2/users]
 
 Returns an array of user profiles. This will return a single user profile of the user making the request. It's useful if you have an Authorization token, but don't have the user ID.
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (Users)
-
 
 ## Update a user profile [PUT /api/v2/users/{id}]
 
@@ -148,8 +155,12 @@ a subset of attributes to update, or all attributes.
 The resource /{id} must be the ID associated with the Authentication token.
 
 + Parameters
-    + id (string) - The user resource id
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Attributes (User)
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (User)
 
@@ -162,7 +173,56 @@ API keys will be different, even if you're invited with the same email address.
 The resource /{id} must be the ID associated with the Authentication token.
 
 + Parameters
-    + id (string) - The user resource id
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
++ Response 200 (application/json)
+
+# Site Users [/api/v2/site/{siteId}/users]
+Site User - *A user profile within a specific site*
+
+## Read a site user profile [GET /api/v2/site/{siteId}/users/{id}]
+
+Returns the Site User profile for the specified site and user ID. 
+
++ Parameters
+    + siteId: `a908` (string, required) - The ID of the site
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
++ Response 200 (application/json)
+    + Attributes (Site User)
+
+## Read site user profiles [GET /api/v2/site/{siteId}/users]
+
+Returns an array of site user profiles. This will return a single site user profile of the user making the request. It's useful if you have an Authorization token and siteId, but don't have the user ID.
+
++ Parameters
+    + siteId: `a908` (string, required) - The ID of the site
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
++ Response 200 (application/json)
+    + Attributes (Site Users)
+
+## Leave a site [DELETE /api/v2/site/{siteId}/users/{id}]
+
+This requests the specified user to leave the site. Once a user has left the site, they must be invited back in.
+
+The resource /{id} must be the ID associated with the Authentication token.
+
++ Parameters
+    + siteId: `a908` (string, required) - The ID of the site
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
 
 # Data Structures
@@ -170,10 +230,46 @@ The resource /{id} must be the ID associated with the Authentication token.
 ## User (object)
 + id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
     The unique user identifier, used in subsequent PUT or DELETE calls.
-
 + firstName: `John` (string, required)
     First Name
-
 + lastName: `Jones` (string)
++ email: `jjones84@gmail.com` (string, required)
++ mobile: `402 889-8765` (string)
 
 ## Users (array [User])
+
+## Site User (object)
++ id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
+    The unique user identifier. This is consistent across sites.
++ firstName: `Johnny` (string, required)
+    First Name, as known at this site
++ lastName: `J` (string)
++ menu (User Menu)
+
+## Site Users (array [User])
+
+## Menu Item (object)
+
++ id: `location-1` (string, required)
+    A unique identifier across all menu items
++ name: `Clone Room` (string, required)
+    The menu item display name
++ icon: `location` (string)
+    An icon name as enumerated in the [ionicons](https://ionicframework.com/docs/ionicons/) page.
++ slug: `location` (string)
+    Required for **webpage** type menu items. This is the unique URL slug for the web page.
++ url: `location` (string)
+    Required for **webpage** type menu items. The URL to navigate to for this menu item.
++ hubId: `d8Je` (string)
+    Required for **dashboard** type menu items. This is the site ID.
++ dashId: `clone-room` (string)
+    Required for **dashboard** type menu items. This is the dashboard DB name.
++ page: `user-settings` (string)
+    For *internal page* menu items. This directs to an internal page in the UI.
++ modalpage: `user-settings` (string)
+    For *internal page* menu items. Same as above, only opens as a modal page vs. root page.
++ items (array [Menu Item], required)
+    Array of menu sub-items if this item is a menu category. Zero length array if this is a leaf menu item.
+
+## User Menu (array [Menu Item])
+
