@@ -13,13 +13,11 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "dredd": "^5.1.4"
   },
   "repository": {
     "type": "git",
     "url": "http://github.com/microclimates/api-v2.git"
   },
   "scripts": {
-    "test": ""
   }
 }

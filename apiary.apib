@@ -119,7 +119,7 @@ User - *An individual that interacts with the system*
 Returns the profile for the specified user ID. 
 
 + Parameters
-    + id (string) - The user resource id
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Response 200 (application/json)
     + Attributes (User)
 
@@ -137,7 +137,7 @@ a subset of attributes to update, or all attributes.
 The resource /{id} must be the ID associated with the Authentication token.
 
 + Parameters
-    + id (string) - The user resource id
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Attributes (User)
 + Response 200 (application/json)
     + Attributes (User)
@@ -151,7 +151,7 @@ API keys will be different, even if you're invited with the same email address.
 The resource /{id} must be the ID associated with the Authentication token.
 
 + Parameters
-    + id (string) - The user resource id
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Response 200 (application/json)
 
 # Site Users [/api/v2/site/{siteId}/users]
@@ -162,14 +162,17 @@ Site User - *A user profile within a specific site*
 Returns the Site User profile for the specified site and user ID. 
 
 + Parameters
-    + siteId (string) - The ID of the site
-    + id (string) - The user resource id
+    + siteId: `a908` (string, required) - The ID of the site
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Response 200 (application/json)
     + Attributes (Site User)
 
 ## Read site user profiles [GET /api/v2/site/{siteId}/users]
 
 Returns an array of site user profiles. This will return a single site user profile of the user making the request. It's useful if you have an Authorization token and siteId, but don't have the user ID.
+
++ Parameters
+    + siteId: `a908` (string, required) - The ID of the site
 + Response 200 (application/json)
     + Attributes (Site Users)
 
@@ -180,11 +183,9 @@ This requests the specified user to leave the site. Once a user has left the sit
 The resource /{id} must be the ID associated with the Authentication token.
 
 + Parameters
-    + siteId (string) - The ID of the site
-    + id (string) - The user resource id
+    + siteId: `a908` (string, required) - The ID of the site
+    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Response 200 (application/json)
-
----
 
 # Data Structures
 
@@ -195,18 +196,17 @@ The resource /{id} must be the ID associated with the Authentication token.
     First Name
 + lastName: `Jones` (string)
 + email: `jjones84@gmail.com` (string, required)
-+ mobile: `402 889-8765` (phone)
++ mobile: `402 889-8765` (string)
 
 ## Users (array [User])
 
 ## Site User (object)
 + id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
     The unique user identifier. This is consistent across sites.
-
 + firstName: `Johnny` (string, required)
     First Name, as known at this site
 + lastName: `J` (string)
-+ menu: (object User Menu)
++ menu (User Menu)
 
 ## Site Users (array [User])
 
@@ -230,7 +230,7 @@ The resource /{id} must be the ID associated with the Authentication token.
     For *internal page* menu items. This directs to an internal page in the UI.
 + modalpage: `user-settings` (string)
     For *internal page* menu items. Same as above, only opens as a modal page vs. root page.
-+ items: (array [Menu Item], required)
++ items (array [Menu Item], required)
     Array of menu sub-items if this item is a menu category. Zero length array if this is a leaf menu item.
 
 ## User Menu (array [Menu Item])
