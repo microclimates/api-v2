@@ -120,12 +120,18 @@ Returns the profile for the specified user ID.
 
 + Parameters
     + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (User)
 
 ## Read user profiles [GET /api/v2/users]
 
 Returns an array of user profiles. This will return a single user profile of the user making the request. It's useful if you have an Authorization token, but don't have the user ID.
++ Request
+    + Headers
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (Users)
 
@@ -139,6 +145,9 @@ The resource /{id} must be the ID associated with the Authentication token.
 + Parameters
     + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Attributes (User)
++ Request
+    + Headers
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (User)
 
@@ -152,6 +161,9 @@ The resource /{id} must be the ID associated with the Authentication token.
 
 + Parameters
     + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
 
 # Site Users [/api/v2/site/{siteId}/users]
@@ -164,6 +176,9 @@ Returns the Site User profile for the specified site and user ID.
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
     + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (Site User)
 
@@ -173,6 +188,9 @@ Returns an array of site user profiles. This will return a single site user prof
 
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
++ Request
+    + Headers
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
     + Attributes (Site Users)
 
@@ -185,6 +203,9 @@ The resource /{id} must be the ID associated with the Authentication token.
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
     + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
 
 # Data Structures
