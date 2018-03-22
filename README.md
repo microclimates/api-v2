@@ -40,6 +40,14 @@ data is passed in the request/response body, as to not get logged on the server.
 If you feel your API token has been compromised, the  token can be revoked and replaced
 within the Microclimates application.
 
+# Compatibility
+
+This major API version (v2) will evolve with additional functionality. All changes
+will be made backwardly compatible as long as your API client can be flexible to allow
+for additional response fields.
+
+Any incompatible changes will be deferred to the next major version (v3).
+
 # Requests
 
 The following sections of the HTTP request are handled the same for each API interaction.
@@ -124,12 +132,12 @@ On unsuccessful API call (status code 400 or higher), the body contains error in
 # Users [/api/v2/users]
 User - *An individual that interacts with the system*
 
-## Read a user profile [GET /api/v2/users/{id}]
+## Read a user profile [GET /api/v2/users/{userId}]
 
 Returns the profile for the specified user ID. 
 
 + Parameters
-    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
+    + userId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Request
     + Headers
 
@@ -147,15 +155,15 @@ Returns an array of user profiles. This will return a single user profile of the
 + Response 200 (application/json)
     + Attributes (Users)
 
-## Update a user profile [PUT /api/v2/users/{id}]
+## Update a user profile [PUT /api/v2/users/{userId}]
 
 Updates your user profile. Most attributes can be updated, but not all. The `body` can contain 
 a subset of attributes to update, or all attributes.
 
-The resource /{id} must be the ID associated with the Authentication token.
+The resource /{userId} must be the ID associated with the Authentication token.
 
 + Parameters
-    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
+    + userId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Attributes (User)
 + Request
     + Headers
@@ -164,66 +172,63 @@ The resource /{id} must be the ID associated with the Authentication token.
 + Response 200 (application/json)
     + Attributes (User)
 
-## Delete a user [DELETE /api/v2/users/{id}]
+## Delete a user [DELETE /api/v2/users/{userId}]
 
 **Be really careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
 API keys will be different, even if you're invited with the same email address.
 
-The resource /{id} must be the ID associated with the Authentication token.
+The resource /{userId} must be the ID associated with the Authentication token.
 
 + Parameters
-    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
+    + userId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
++ Response 200
+
+# Sites [/api/v2/sites]
+Site - *A physical installation with managed devices*
+
+## Read available sites [GET /api/v2/sites]
+
+Returns all sites authorized for the user, as specified in the Authorization token.
+
+This request is served without directly contacting the sites.
+
 + Request
     + Headers
 
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
+    + Attributes (array [Site Summary])
 
-# Site Users [/api/v2/site/{siteId}/users]
-Site User - *A user profile within a specific site*
+## Read site information [GET /api/v2/sites/{siteId}]
 
-## Read a site user profile [GET /api/v2/site/{siteId}/users/{id}]
-
-Returns the Site User profile for the specified site and user ID. 
-
-+ Parameters
-    + siteId: `a908` (string, required) - The ID of the site
-    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
-+ Request
-    + Headers
-
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
-+ Response 200 (application/json)
-    + Attributes (Site User)
-
-## Read site user profiles [GET /api/v2/site/{siteId}/users]
-
-Returns an array of site user profiles. This will return a single site user profile of the user making the request. It's useful if you have an Authorization token and siteId, but don't have the user ID.
-
-+ Parameters
-    + siteId: `a908` (string, required) - The ID of the site
-+ Request
-    + Headers
-
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
-+ Response 200 (application/json)
-    + Attributes (Site Users)
-
-## Leave a site [DELETE /api/v2/site/{siteId}/users/{id}]
-
-This requests the specified user to leave the site. Once a user has left the site, they must be invited back in.
-
-The resource /{id} must be the ID associated with the Authentication token.
+Returns site details for the user. This request is served by the site.
 
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
-    + id: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
 + Request
     + Headers
 
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
+    + Attributes (Site)
+
+## Leave a site [DELETE /api/v2/sites/{siteId}]
+
+This requests the user specified by the Authorization token to leave the site.
+Once a user has left a site, they must be invited back in.
+
++ Parameters
+    + siteId: `a908` (string, required) - The ID of the site
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
++ Response 200
 
 # Data Structures
 
@@ -231,22 +236,27 @@ The resource /{id} must be the ID associated with the Authentication token.
 + id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
     The unique user identifier, used in subsequent PUT or DELETE calls.
 + firstName: `John` (string, required)
-    First Name
 + lastName: `Jones` (string)
 + email: `jjones84@gmail.com` (string, required)
 + mobile: `402 889-8765` (string)
++ avatarUrl: `https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50` (string)
+    This starts out as a gravatar URL, and can be changed by uploading an avatar.
 
 ## Users (array [User])
 
-## Site User (object)
-+ id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
-    The unique user identifier. This is consistent across sites.
-+ firstName: `Johnny` (string, required)
-    First Name, as known at this site
-+ lastName: `J` (string)
-+ menu (User Menu)
+## Site Summary (object)
++ id: `a908` (string)
+    The unique identifier, to be used as siteId in site related API requests.
++ name: `Indoor Farm North` (string)
+    Name given to the site by the site owner.
 
-## Site Users (array [User])
+## Site (object)
++ id: `a908` (string)
+    The unique identifier, to be used as siteId in site related API requests.
++ name: `Indoor Farm North` (string)
+    Name given to the site by the site owner.
++ menu (array [Menu Item])
+    The list of menu items available for the requesting user.
 
 ## Menu Item (object)
 
@@ -270,6 +280,4 @@ The resource /{id} must be the ID associated with the Authentication token.
     For *internal page* menu items. Same as above, only opens as a modal page vs. root page.
 + items (array [Menu Item], required)
     Array of menu sub-items if this item is a menu category. Zero length array if this is a leaf menu item.
-
-## User Menu (array [Menu Item])
 
