@@ -164,7 +164,7 @@ The resource /{userId} must be the ID associated with the Authentication token.
 
 ## Delete a user [DELETE /api/v2/users/{userId}]
 
-**Be really careful with this one.** If you delete yourself, that will be the last API call you're
+**Be very careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
 API keys will be different, even if you're invited with the same email address.
 
@@ -271,4 +271,3 @@ Once a user has left a site, they must be invited back in.
     For *internal page* menu items. Same as above, only opens as a modal page vs. root page.
 + items (array [Menu Item], required)
     Array of menu sub-items if this item is a menu category. Zero length array if this is a leaf menu item.
-
