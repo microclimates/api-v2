@@ -112,7 +112,6 @@ id=some-resource-id&name=Resource%20Name
 
 ## Response Headers
 
-**access-control-allow-origin** - Set to `*` to allow cross domain browser requests.  
 **content-encoding** - Supplied if the content was encoded, as requested by the `accept-encoding` request header.  
 **content-length** - Byte count of the content body  
 **content-type** - The content type response. Usually `appliction/json; charset-utf-8`  
@@ -121,7 +120,10 @@ id=some-resource-id&name=Resource%20Name
 **status** - The status code response  
 **vary** - A value that may be useful for network caches  
 **x-request-id** - A unique identifier for this request. If a request fails, this can be used to help trace the problem from server logs.  
-**x-response-time** - The amount of time this request took for the server to process.
+**x-response-time** - The amount of time this request took for the server to process.  
+**Access-Control-Allow-Origin** - Set to `*` to allow cross domain browser requests.  
+**Access-Control-Allow-Headers** - Set to `Authorization, Cookie` to allow authorization.  
+**Access-Control-Allow-Methods** - Set to `GET, POST, PUT, DELETE` to allow all API requests.  
 
 ## Response Body
 
@@ -174,7 +176,7 @@ The resource /{userId} must be the ID associated with the Authentication token.
 
 ## Delete a user [DELETE /api/v2/users/{userId}]
 
-**Be really careful with this one.** If you delete yourself, that will be the last API call you're
+**Be very careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
 API keys will be different, even if you're invited with the same email address.
 
@@ -231,6 +233,21 @@ Once a user has left a site, they must be invited back in.
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200
 
+# Invitations [/api/v2/invites]
+Invitation - *A request to invite a person to a site*. Sites are accessible by invite only.
+
+## Send an invitation [POST /api/v2/invites]
+
+Send an email invitation to join a site. This includes the security role for the individual 
+and a custom message from the sender, so the recipient knows it didn't originate from a robot.
+
++ Attributes (Invite)
++ Request
+    + Headers
+
+            Authorization: Basic ABCD-EFGH-IJKL-MNOP
++ Response 200
+
 # Data Structures
 
 ## User (object)
@@ -245,6 +262,13 @@ Once a user has left a site, they must be invited back in.
 
 ## Users (array [User])
 
+## UserRole (enum[number])
++ `0` - Guest (custom authority)
++ `1` - Monitor (read only)
++ `2` - Controller (read and control)
++ `3` - Admin (administer site)
++ `4` - Owner (site owner)
+
 ## Site Summary (object)
 + id: `a908` (string)
     The unique identifier, to be used as siteId in site related API requests.
@@ -256,6 +280,8 @@ Once a user has left a site, they must be invited back in.
     The unique identifier, to be used as siteId in site related API requests.
 + name: `Indoor Farm North` (string)
     Name given to the site by the site owner.
++ role (UserRole)
+    The primary role (owner, admin, controller, monitor, guest)
 + menu (array [Menu Item])
     The list of menu items available for the requesting user.
 
@@ -281,4 +307,16 @@ Once a user has left a site, they must be invited back in.
     For *internal page* menu items. Same as above, only opens as a modal page vs. root page.
 + items (array [Menu Item], required)
     Array of menu sub-items if this item is a menu category. Zero length array if this is a leaf menu item.
+
+## Invite (object)
++ id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
+    The unique invite identifier. Generated on the server.
++ siteId: `a908` (string, required)
+    ID of the site being invited into.
++ role (UserRole, required)
+    The security role of the user for this site.
++ email: `jjones84@gmail.com` (string, required)
+    Email address of the invitee.
++ message: `Come see what we're doing here.` (string, required)
+    Personal message to send to the person being invited.
 
