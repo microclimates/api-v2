@@ -36,7 +36,7 @@ within the Microclimates application.
 
 The following sections of the HTTP request are handled the same for each API interaction.
 
-## Request URL
+<h2>Request URL</h2>
 
 The request URL is made with the following parts, in order
 
@@ -47,7 +47,7 @@ The request URL is made with the following parts, in order
 **Resource ID** - `/{resource id}` (not used for *POST*)  
 **Query Parameters** - `?param1=value1&param2=value2` (specialized for queries)
 
-## Request Headers
+<h2>Request Headers</h2>
 
 The following request headers are recognized
 
@@ -56,7 +56,7 @@ The following request headers are recognized
 **accept-encoding** - Supplied if your client accepts gzip, deflate, etc. encoding  
 **if-none-match** - Supplied on *GET* requests if you want a `304` response instead of the response body if the body hasn't changed. The value is that of a prior `etag` response header value.
 
-## Content Body
+<h2>Content Body</h2>
 
 The format of data supplied in the request body is based on the `Content-Type` header
  (see above).
@@ -79,7 +79,7 @@ id=some-resource-id&name=Resource%20Name
 
 # Responses
 
-## Status Codes
+<h2>Status Codes</h2>
 
 **The following codes indicate success:**
 
@@ -95,7 +95,7 @@ id=some-resource-id&name=Resource%20Name
 **501** *Not Implemented* - Coming soon to an API near you.  
 **503** *Bad Gateway* - The cloud servers are having a problem connecting with the site server.  
 
-## Response Headers
+<h2>Response Headers</h2>
 
 **content-encoding** - Supplied if the content was encoded, as requested by the `accept-encoding` request header.  
 **content-length** - Byte count of the content body  
@@ -110,7 +110,7 @@ id=some-resource-id&name=Resource%20Name
 **Access-Control-Allow-Headers** - Set to `Authorization, Cookie` to allow authorization.  
 **Access-Control-Allow-Methods** - Set to `GET, POST, PUT, DELETE` to allow all API requests.  
 
-## Response Body
+<h2>Response Body</h2>
 
 On successful API call, the body is as documented. 
 
