@@ -234,17 +234,6 @@ and a custom message from the sender, so the recipient knows it didn't originate
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200
 
-## View outstanding invitations [GET /api/v2/invites]
-
-This is used to view invitations created by the requester that have yet not been accepted.
-
-+ Request
-    + Headers
-
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
-+ Response 200 (application/json)
-    + Attributes (array [Invite])
-
 ## Review an invitation [GET /api/v2/invites/{inviteId}]
 
 This is used by the person being invited as a way to see who invited them, and into which
