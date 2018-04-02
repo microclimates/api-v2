@@ -239,6 +239,47 @@ and a custom message from the sender, so the recipient knows it didn't originate
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200
 
+## Review an invitation [GET /api/v2/invites/{inviteId}]
+
+This is used by the person being invited as a way to see who invited them, and into which
+site they're being invited into.
+
+This request may accept authorization, and if given it must match the credentials of 
+the person being invited, or the person that created the invitation.
+
++ Parameters
+    + inviteId: `some-long-uuid` (string, required) - The invite ID, generated during POST.
++ Response 200 (application/json)
+    + Attributes (Invite)
+
+## Accept an invitation [PUT /api/v2/invites/{inviteId}]
+
+This is used by the person being invited upon accepting the invite. It creates the user
+account if necessary, and connects the user into the site with the proper security credentials.
+
+This request may accept authorization, and if given it must match the credentials of 
+the person being invited.
+
+Invitations that have not been accepted within a few days of creation will be invalidated.
+
++ Attributes (Invite)
++ Parameters
+    + inviteId: `some-long-uuid` (string, required) - The invite ID, generated during POST.
++ Response 200 (application/json)
+    + Attributes (Invite)
+
+## Cancel an invitation [DELETE /api/v2/invites/{inviteId}]
+
+This is used to cancel an existing inviation. It can be initiated by the person making
+the invitation, or by the person being invited as a way of canceling the invitation request.
+
+This request may accept authorization, and if given it must match the credentials of 
+the person being invited, or the person that created the invitation.
+
++ Parameters
+    + inviteId: `some-long-uuid` (string, required) - The invite ID, generated during POST.
++ Response 200
+
 # Data Structures
 
 ## User (object)
@@ -304,6 +345,10 @@ and a custom message from the sender, so the recipient knows it didn't originate
     The unique invite identifier. Generated on the server.
 + siteId: `a908` (string, required)
     ID of the site being invited into.
++ siteName: `Indoor Farm North` (string, readonly)
+    Site name. Provided for convenience on GET.
++ invitedBy: `Mary Maker` (string, readonly)
+    Invitation created by. Provided for convenience on GET.
 + role (UserRole, required)
     The security role of the user for this site.
 + firstName: `Johnny` (string)
@@ -312,5 +357,5 @@ and a custom message from the sender, so the recipient knows it didn't originate
     Last name of the person being invited.
 + email: `jjones84@gmail.com` (string, required)
     Email address of the invitee.
-+ message: `Come see what we're doing here.` (string, required)
++ message: `Come see what we're doing here.` (string)
     Personal message to send to the person being invited.
