@@ -30,14 +30,6 @@ data is passed in the request/response body, as to not get logged on the server.
 If you feel your API token has been compromised, the  token can be revoked and replaced
 within the Microclimates application.
 
-# Compatibility
-
-This major API version (v2) will evolve with additional functionality. All changes
-will be made backwardly compatible as long as your API client can be flexible to allow
-for additional response fields.
-
-Any incompatible changes will be deferred to the next major version (v3).
-
 # Requests
 
 The following sections of the HTTP request are handled the same for each API interaction.
@@ -241,7 +233,7 @@ and a custom message from the sender, so the recipient knows it didn't originate
 
 ## View outstanding invitations [GET /api/v2/invites]
 
-This is used to view invitations created by the requester that have not been accepted.
+This is used to view invitations created by the requester that have yet not been accepted.
 
 + Request
     + Headers
