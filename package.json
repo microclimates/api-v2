@@ -20,6 +20,6 @@
     "url": "http://github.com/microclimates/api-v2.git"
   },
   "scripts": {
-    "html": "aglio --theme-full-width --theme-variables styles.less -i apiary.apib -o climate-control-api.html"
+    "html": "scripts/gen-html.sh"
   }
 }
