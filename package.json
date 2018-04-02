@@ -11,13 +11,15 @@
     "microclimates"
   ],
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
+    "aglio": "^2.3.0"
   },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "http://github.com/microclimates/api-v2.git"
   },
   "scripts": {
+    "html": "aglio --theme-variables default -i apiary.apib -o climate-control-api.html"
   }
 }
