@@ -4,7 +4,7 @@ HOST: https://microclimates.com
 # Climate Conrol API
 
 The Microclimates Climate Control API allows authorized developers to interact with 
-Microclimates sites and devices from the context of a user.  
+Microclimates sites and devices from the context of a user account.  
 
 It offers all functionality used in the Microclimates UI, and additional
 items for posting and retrieving device data.
@@ -15,11 +15,11 @@ A live preview of the API is hosted on
 # Authorization
 
 All API interactions must be authorized by passing
-the user authentication token in the HTTP Authorization header.
+the account authentication token in the HTTP Authorization header.
 ```
 Authorization: Bearer {token}
 ```
-This token is available in the User Settings section within the Microclimates 
+This token is available in the Account Settings section within the Microclimates 
 application.
 
 # Security
@@ -117,59 +117,59 @@ On successful API call, the body is as documented.
 
 On unsuccessful API call (status code 400 or higher), the body contains error information.
 
-# Users [/api/v2/users]
-User - *An individual that interacts with the system*
+# Accounts [/api/v2/accounts]
+Account - *An individual that interacts with the system*
 
-## Read a user profile [GET /api/v2/users/{userId}]
+## Read an account profile [GET /api/v2/accounts/{accountId}]
 
-Returns the profile for the specified user ID. 
+Returns the account profile for the specified ID. 
 
 + Parameters
-    + userId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
+    + accountId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The account resource id
 + Request
     + Headers
 
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
-    + Attributes (User)
+    + Attributes (Account)
 
-## Read user profiles [GET /api/v2/users]
+## Read account profiles [GET /api/v2/accounts]
 
-Returns an array of user profiles. This will return a single user profile of the user making the request. It's useful if you have an Authorization token, but don't have the user ID.
+Returns an array of account profiles. This will return a single account profile of the person making the request. It's useful if you have an Authorization token, but don't have the account ID.
 + Request
     + Headers
 
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
-    + Attributes (Users)
+    + Attributes (Accounts)
 
-## Update a user profile [PUT /api/v2/users/{userId}]
+## Update an account profile [PUT /api/v2/accounts/{accountId}]
 
-Updates your user profile. Most attributes can be updated, but not all. The `body` can contain 
+Updates your account profile. Most attributes can be updated, but not all. The `body` can contain 
 a subset of attributes to update, or all attributes.
 
-The resource /{userId} must be the ID associated with the Authentication token.
+The resource /{accountId} must be the ID associated with the Authentication token.
 
 + Parameters
-    + userId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
-+ Attributes (User)
+    + accountId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The account resource id
++ Attributes (Account)
 + Request
     + Headers
 
             Authorization: Basic ABCD-EFGH-IJKL-MNOP
 + Response 200 (application/json)
-    + Attributes (User)
+    + Attributes (Account)
 
-## Delete a user [DELETE /api/v2/users/{userId}]
+## Delete an account [DELETE /api/v2/accounts/{accountId}]
 
 **Be very careful with this one.** If you delete yourself, that will be the last API call you're
-able to make. You will be removed from all sites, and will have to be re-invited. Your user id and
+able to make. You will be removed from all sites, and will have to be re-invited. Your account id and
 API keys will be different, even if you're invited with the same email address.
 
-The resource /{userId} must be the ID associated with the Authentication token.
+The resource /{accountId} must be the ID associated with the Authentication token.
 
 + Parameters
-    + userId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The user resource id
+    + accountId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The account resource id
 + Request
     + Headers
 
@@ -178,11 +178,11 @@ The resource /{userId} must be the ID associated with the Authentication token.
 
 # Sites [/api/v2/sites]
 Site - *A physical installation with managed devices.* All sites are associated with a *site server*,
-also known as an *edge server*, responsible for managing devices, users, and security for the location.
+also known as an *edge server*, responsible for managing devices, accounts, and security for the location.
 
 ## Read available sites [GET /api/v2/sites]
 
-Returns all sites authorized for the user, as specified in the Authorization token.
+Returns all sites authorized for the account, as specified in the Authorization token.
 
 This request is served without directly contacting the site servers.
 
@@ -195,7 +195,7 @@ This request is served without directly contacting the site servers.
 
 ## Read site information [GET /api/v2/sites/{siteId}]
 
-Returns site details for the user. This request is made to the site server.
+Returns site details for the account. This request is made to the site server.
 
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
@@ -208,8 +208,8 @@ Returns site details for the user. This request is made to the site server.
 
 ## Leave a site [DELETE /api/v2/sites/{siteId}]
 
-This requests the user specified by the Authorization token to leave the site.
-Once a user has left a site, they must be invited back in.
+This requests the account specified by the Authorization token to leave the site.
+Once a account owner has left a site, they must be invited back in.
 
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
@@ -250,7 +250,7 @@ the person being invited, or the person that created the invitation.
 ## Accept an invitation [PUT /api/v2/invites/{inviteId}]
 
 This is used by the person being invited upon accepting the invite. It creates the user
-account if necessary, and connects the user into the site with the proper security credentials.
+account if necessary, and associates the account with the site.
 
 This request may accept authorization, and if given it must match the credentials of 
 the person being invited.
@@ -277,9 +277,9 @@ the person being invited, or the person that created the invitation.
 
 # Data Structures
 
-## User (object)
+## Account (object)
 + id: `3627cc99-d839-4684-bd78-8322703b273f` (string)
-    The unique user identifier, used in subsequent PUT or DELETE calls.
+    The unique account identifier, used in subsequent PUT or DELETE calls.
 + firstName: `John` (string, required)
 + lastName: `Jones` (string)
 + email: `jjones84@gmail.com` (string, required)
@@ -287,9 +287,9 @@ the person being invited, or the person that created the invitation.
 + avatarUrl: `https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50` (string)
     This starts out as a gravatar URL, and can be changed by uploading an avatar.
 
-## Users (array [User])
+## Accounts (array [Account])
 
-## UserRole (enum[number])
+## AccountRole (enum[number])
 + `0` - Guest (custom authority)
 + `1` - Monitor (read only)
 + `2` - Controller (read and control)
@@ -307,10 +307,10 @@ the person being invited, or the person that created the invitation.
     The unique identifier, to be used as siteId in site related API requests.
 + name: `Indoor Farm North` (string)
     Name given to the site by the site owner.
-+ role (UserRole)
++ role (AccountRole)
     The primary role (owner, admin, controller, monitor, guest)
 + menu (array [Menu Item])
-    The list of menu items available for the requesting user.
+    The list of menu items available for the requesting account.
 
 ## Menu Item (object)
 
@@ -328,9 +328,9 @@ the person being invited, or the person that created the invitation.
     Required for **dashboard** type menu items. This is the site ID.
 + dashId: `clone-room` (string)
     Required for **dashboard** type menu items. This is the dashboard DB name.
-+ page: `user-settings` (string)
++ page: `account-settings` (string)
     For *internal page* menu items. This directs to an internal page in the UI.
-+ modalpage: `user-settings` (string)
++ modalpage: `account-settings` (string)
     For *internal page* menu items. Same as above, only opens as a modal page vs. root page.
 + items (array [Menu Item], required)
     Array of menu sub-items if this item is a menu category. Zero length array if this is a leaf menu item.
@@ -344,8 +344,8 @@ the person being invited, or the person that created the invitation.
     Site name. Provided for convenience on GET.
 + invitedBy: `Mary Maker` (string)
     Invitation created by. Provided for convenience on GET.
-+ role (UserRole, required)
-    The security role of the user for this site.
++ role (AccountRole, required)
+    The security role of the account for this site.
 + firstName: `Johnny` (string)
     First name of the person being invited.
 + lastName: `Jones` (string)
