@@ -3,13 +3,17 @@ HOST: https://microclimates.com
 
 # Climate Conrol API
 
-The Microclimates Climate Control API allows authorized developers to interact with 
-Microclimates sites and devices from the context of a user account.  
+The Microclimates Climate Control API lets you connect your devices and data
+with external products and services, breaking existing constraints, and extending
+functionality to the limits of your imagination.
 
-It offers all functionality used in the Microclimates UI, and additional
-items for posting and retrieving device data.
+When connected with services such as <a href="https://ifttt.com>IFTTT</a> or your favorite
+vendor's API, a <a href="https://www.microclimates.com/professional-services>professional services</a>
+team can integrate data and controls into a system customized to your business.
 
-A live preview of the API is hosted on 
+Your devices. Your data. On your terms.
+
+A live preview of the API for developers is hosted on 
 <a href="https://microclimates.docs.apiary.io" target="_blank">microclimates.docs.apiary.io</a>
 
 # Authorization
@@ -289,7 +293,7 @@ the person being invited, or the person that created the invitation.
 
 ## Accounts (array [Account])
 
-## AccountRole (enum[number])
+## UserRole (enum[number])
 + `0` - Guest (custom authority)
 + `1` - Monitor (read only)
 + `2` - Controller (read and control)
@@ -307,7 +311,7 @@ the person being invited, or the person that created the invitation.
     The unique identifier, to be used as siteId in site related API requests.
 + name: `Indoor Farm North` (string)
     Name given to the site by the site owner.
-+ role (AccountRole)
++ role (UserRole)
     The primary role (owner, admin, controller, monitor, guest)
 + menu (array [Menu Item])
     The list of menu items available for the requesting account.
@@ -344,7 +348,7 @@ the person being invited, or the person that created the invitation.
     Site name. Provided for convenience on GET.
 + invitedBy: `Mary Maker` (string)
     Invitation created by. Provided for convenience on GET.
-+ role (AccountRole, required)
++ role (UserRole, required)
     The security role of the account for this site.
 + firstName: `Johnny` (string)
     First name of the person being invited.
