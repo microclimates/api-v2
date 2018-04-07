@@ -310,6 +310,7 @@ the person being invited, or the person that created the invitation.</p>
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"siteId"</span>,
     <span class="hljs-string">"role"</span>,
+    <span class="hljs-string">"firstName"</span>,
     <span class="hljs-string">"email"</span>
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="invitations-put" class="action put"><h4 class="action-heading"><div class="name">Accept an invitation</div><a href="#invitations-put" class="method put">PUT</a><code class="uri">/api/v2/invites/{inviteId}</code></h4><p>This is used by the person being invited upon accepting the invite. It creates the user
@@ -379,6 +380,7 @@ the person being invited.</p>
   "<span class="hljs-attribute">required</span>": <span class="hljs-value">[
     <span class="hljs-string">"siteId"</span>,
     <span class="hljs-string">"role"</span>,
+    <span class="hljs-string">"firstName"</span>,
     <span class="hljs-string">"email"</span>
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="invitations-delete" class="action delete"><h4 class="action-heading"><div class="name">Cancel an invitation</div><a href="#invitations-delete" class="method delete">DELETE</a><code class="uri">/api/v2/invites/{inviteId}</code></h4><p>This is used to cancel an existing inviation. It can be initiated by the person making
