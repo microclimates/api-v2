@@ -130,11 +130,11 @@ Account - *Information associated with an individual that interacts with the sys
 Returns the account profile for the specified ID. 
 
 + Parameters
-    + accountId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The account resource id
+    + accountId: `eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009` (string, required) - The account resource id
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200 (application/json)
     + Attributes (Account)
 
@@ -144,7 +144,7 @@ Returns an array of account profiles. This will return a single account profile 
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200 (application/json)
     + Attributes (Accounts)
 
@@ -156,12 +156,12 @@ a subset of attributes to update, or all attributes.
 The resource /{accountId} must be the ID associated with the Authentication token.
 
 + Parameters
-    + accountId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The account resource id
+    + accountId: `eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009` (string, required) - The account resource id
 + Attributes (Account)
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200 (application/json)
     + Attributes (Account)
 
@@ -174,11 +174,11 @@ API keys will be different, even if you're invited with the same email address.
 The resource /{accountId} must be the ID associated with the Authentication token.
 
 + Parameters
-    + accountId: `a3ec1321-cb6f-4957-bfc0-0b68d78caeba` (string, required) - The account resource id
+    + accountId: `eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009` (string, required) - The account resource id
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200
 
 # Sites [/api/v2/sites]
@@ -194,7 +194,7 @@ This request is served without directly contacting the site servers.
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200 (application/json)
     + Attributes (array [Site Summary])
 
@@ -207,7 +207,7 @@ Returns site details for the account. This request is made to the site server.
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200 (application/json)
     + Attributes (Site)
 
@@ -221,7 +221,7 @@ Once a account owner has left a site, they must be invited back in.
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200
 
 # Invitations [/api/v2/invites]
@@ -236,7 +236,7 @@ and a custom message from the sender, so the recipient knows it didn't originate
 + Request
     + Headers
 
-            Authorization: Basic ABCD-EFGH-IJKL-MNOP
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200
 
 ## Review an invitation [GET /api/v2/invites/{inviteId}]

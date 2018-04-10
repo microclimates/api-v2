@@ -12,9 +12,10 @@
   ],
   "license": "MIT",
   "dependencies": {
+  },
+  "devDependencies": {
     "aglio": "^2.3.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "http://github.com/microclimates/api-v2.git"
