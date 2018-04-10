@@ -10,10 +10,12 @@ team can build custom integrations, consolidating previously disconnected system
 <a href="https://microclimates.docs.apiary.io" target="_blank">microclimates.docs.apiary.io</a></p>
 <h1 id="header-authorization">Authorization <a class="permalink" href="#header-authorization" aria-hidden="true">¶</a></h1>
 <p>All API interactions must be authorized by passing
-the account authentication token in the HTTP Authorization header.</p>
-<pre><code>Authorization: Bearer eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009</code></pre>
+the account API token in the HTTP Authorization header.</p>
+<pre><code><span class="hljs-attribute">Authorization</span>: <span class="hljs-string">Bearer {API Token}</span></code></pre>
 <p>This token is available in the Account Settings section within the Microclimates
 application under <i>API Key</i>.</p>
+<p>Example:</p>
+<pre><code>Authorization: Bearer eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009</code></pre>
 <h1 id="header-security">Security <a class="permalink" href="#header-security" aria-hidden="true">¶</a></h1>
 <p>The API processes only HTTPS requests, securing the content from
 observation while traveling over the network.</p>
