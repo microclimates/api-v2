@@ -46,18 +46,16 @@ within the Microclimates application.
 
 # Requests
 
-The following sections of the HTTP request are handled the same for each API interaction.
-
 <h2>Request Headers</h2>
 
-The following request headers are recognized
+The following (case insensitive) request headers are recognized
 
 **authorization** - (see Authorization section above)  
-**content-type** - Describes the format of the content body one of `application/json` or `application/x-www-form-urlencoded`  
+**content-type** - Describes the format of the request body. One of `application/json` or `application/x-www-form-urlencoded`  
 **accept-encoding** - Supplied if your client accepts gzip, deflate, etc. encoding  
-**if-none-match** - Supplied on *GET* requests if you want a `304` response instead of the response body if the body hasn't changed. The value is that of a prior `etag` response header value.
+**if-none-match** - Supplied on *GET* requests if you want a `304 - Not Modified` response if the content hasn't changed. The value is that of a prior `etag` response header value. This improves performance by not transferrng the response body if it's the same as a prior request.  
 
-<h2>Content Body</h2>
+<h2>Request Body</h2>
 
 The format of data supplied in the request body is based on the `Content-Type` header
  (see above).
@@ -102,9 +100,9 @@ id=some-resource-id&name=Resource%20Name
 **content-length** - Byte count of the content body  
 **content-type** - The content type response. Usually `appliction/json; charset-utf-8`  
 **date** - The timestamp that the request arrived  
-**etag** - A unique code representing the response. Used in conjunction with the `if-none-match` request header.  
-**status** - The status code response  
-**vary** - A value that may be useful for network caches  
+**etag** - A unique value representing the content of this response. If this value is supplied in a subsequent `if-none-match` request header and the content hasn't changed, the response code will be `304 - Not Modified`.  
+**status** - The respons status code (see above)  
+**vary** - A value that may be supplied, informing network caches how this content varies so they can quickly respond to similar requests.  
 **x-request-id** - A unique identifier for this request. If a request fails, this can be used to help trace the problem from server logs.  
 **x-response-time** - The amount of time this request took for the server to process.  
 **Access-Control-Allow-Origin** - Set to `*` to allow cross domain browser requests.  
@@ -113,9 +111,22 @@ id=some-resource-id&name=Resource%20Name
 
 <h2>Response Body</h2>
 
-On successful API call, the body is as documented. 
+**Successful** API calls are documented in the API below.
 
-On unsuccessful API call (status code 400 or higher), the body contains error information.
+**Unsuccessful** API calls (status code 400 or higher) have the following format. Clients should be capable of managing the different response body formats based on the response status code.
+```
+{
+  "name": "Unauthorized",
+  "statusCode": 401,
+  "message": "HTTP 401 Unauthorized",
+  "timestamp": "2018-08-19T18:05:17.480Z",
+  "requestId": "f14d156c-5e90-4457-aaa6-d8f6757b07ba",
+  "meta": {
+    "warnings": [],
+    "moreInfo": []
+  }
+}
+```
 
 # Accounts [/api/v2/accounts]
 Account - *Information associated with an individual that interacts with the system*
