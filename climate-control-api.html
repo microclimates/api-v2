@@ -25,14 +25,6 @@ data is passed in the request/response body, as to not get logged on the server.
 within the Microclimates application.</p>
 <h1 id="header-requests">Requests <a class="permalink" href="#header-requests" aria-hidden="true">¶</a></h1>
 <p>The following sections of the HTTP request are handled the same for each API interaction.</p>
-<p><h2>Request URL</h2></p>
-<p>The request URL is made with the following parts, in order</p>
-<p><strong>Scheme</strong> - <code>https://</code><br>
-<strong>Server</strong> - <code>microclimates.com</code><br>
-<strong>API Path</strong> - <code>/api/v2</code><br>
-<strong>Resource Type</strong> - <code>/{resource type}</code><br>
-<strong>Resource ID</strong> - <code>/{resource id}</code> (not used for <em>POST</em>)<br>
-<strong>Query Parameters</strong> - <code>?param1=value1&amp;param2=value2</code> (specialized for queries)</p>
 <p><h2>Request Headers</h2></p>
 <p>The following request headers are recognized</p>
 <p><strong>authorization</strong> - (see Authorization section above)<br>
@@ -55,14 +47,14 @@ within the Microclimates application.</p>
 <p><h2>Status Codes</h2></p>
 <p><strong>The following codes indicate success:</strong></p>
 <p><strong>200</strong> <em>OK</em> - Everything went according to plan, and the results are as documented.<br>
-<strong>304</strong> <em>Not Modified</em> - No body returned. Used in conjunction with the ETag header (above)</p>
+<strong>304</strong> <em>Not Modified</em> - No body returned. Used in conjunction with the <code>if-none-match</code> request header.</p>
 <p><strong>The following codes indicate an error.</strong> They return an error body vs. the documented body, for the following reasons</p>
 <p><strong>400</strong> <em>Bad Request</em> - The request fails a precondition and was rejected. Reason indicated in the body.<br>
 <strong>401</strong> <em>Unauthorized</em> - Authorization header not supplied, or supplied with an invalid token.<br>
 <strong>404</strong> <em>Not Found</em> - The resource requested by ID is not found in the system.<br>
 <strong>500</strong> <em>Internal Server Error</em> - Oh crap - something bad happened on our end. You might find something useful in the response body.<br>
 <strong>501</strong> <em>Not Implemented</em> - Coming soon to an API near you.<br>
-<strong>503</strong> <em>Bad Gateway</em> - The cloud servers are having a problem connecting with the site server.</p>
+<strong>503</strong> <em>Bad Gateway</em> - The cloud servers are having a problem connecting with the on-site edge server.</p>
 <p><h2>Response Headers</h2></p>
 <p><strong>content-encoding</strong> - Supplied if the content was encoded, as requested by the <code>accept-encoding</code> request header.<br>
 <strong>content-length</strong> - Byte count of the content body<br>

@@ -48,17 +48,6 @@ within the Microclimates application.
 
 The following sections of the HTTP request are handled the same for each API interaction.
 
-<h2>Request URL</h2>
-
-The request URL is made with the following parts, in order
-
-**Scheme** - `https://`  
-**Server** - `microclimates.com`  
-**API Path** - `/api/v2`  
-**Resource Type** - `/{resource type}`  
-**Resource ID** - `/{resource id}` (not used for *POST*)  
-**Query Parameters** - `?param1=value1&param2=value2` (specialized for queries)
-
 <h2>Request Headers</h2>
 
 The following request headers are recognized
@@ -96,7 +85,7 @@ id=some-resource-id&name=Resource%20Name
 **The following codes indicate success:**
 
 **200** *OK* - Everything went according to plan, and the results are as documented.  
-**304** *Not Modified* - No body returned. Used in conjunction with the ETag header (above)  
+**304** *Not Modified* - No body returned. Used in conjunction with the `if-none-match` request header.
 
 **The following codes indicate an error.** They return an error body vs. the documented body, for the following reasons
 
@@ -105,7 +94,7 @@ id=some-resource-id&name=Resource%20Name
 **404** *Not Found* - The resource requested by ID is not found in the system.  
 **500** *Internal Server Error* - Oh crap - something bad happened on our end. You might find something useful in the response body.  
 **501** *Not Implemented* - Coming soon to an API near you.  
-**503** *Bad Gateway* - The cloud servers are having a problem connecting with the site server.  
+**503** *Bad Gateway* - The cloud servers are having a problem connecting with the on-site edge server.  
 
 <h2>Response Headers</h2>
 
