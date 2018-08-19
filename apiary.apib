@@ -132,7 +132,7 @@ On unsuccessful API call (status code 400 or higher), the body contains error in
 Account - *Information associated with an individual that interacts with the system*
 
 ## Read an account profile [GET /api/v2/accounts/{accountId}]
-
+## Read an account profile
 Returns the account profile for the specified ID. 
 
 + Parameters
@@ -145,6 +145,7 @@ Returns the account profile for the specified ID.
     + Attributes (Account)
 
 ## Read account profiles [GET /api/v2/accounts]
+## Read account profiles
 
 Returns an array of account profiles. This will return a single account profile of the person making the request. It's useful if you have an Authorization token, but don't have the account ID.
 + Request
@@ -155,6 +156,7 @@ Returns an array of account profiles. This will return a single account profile 
     + Attributes (Accounts)
 
 ## Update an account profile [PUT /api/v2/accounts/{accountId}]
+## Update an account profile
 
 Updates your account profile. Most attributes can be updated, but not all. The `body` can contain 
 a subset of attributes to update, or all attributes.
@@ -163,8 +165,8 @@ The resource /{accountId} must be the ID associated with the Authentication toke
 
 + Parameters
     + accountId: `1e46f669-cf98-4d04-8d19-34fd93feea19` (string, required) - The account resource id
-+ Attributes (Account)
 + Request
+    + Attributes (Account)
     + Headers
 
             Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
@@ -172,6 +174,7 @@ The resource /{accountId} must be the ID associated with the Authentication toke
     + Attributes (Account)
 
 ## Delete an account [DELETE /api/v2/accounts/{accountId}]
+## Delete an account
 
 **Be very careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your account id and
@@ -192,6 +195,7 @@ Site - *A physical installation with managed devices.* All sites are associated 
 also known as an *edge server*, responsible for managing devices, accounts, and security for the location.
 
 ## Read available sites [GET /api/v2/sites]
+## Read available sites
 
 Returns all sites authorized for the account, as specified in the Authorization token.
 
@@ -205,6 +209,7 @@ This request is served without directly contacting the site servers.
     + Attributes (array [Site Summary])
 
 ## Read site information [GET /api/v2/sites/{siteId}]
+## Read site information
 
 Returns site details for the account. This request is made to the site server.
 
@@ -218,9 +223,10 @@ Returns site details for the account. This request is made to the site server.
     + Attributes (Site)
 
 ## Leave a site [DELETE /api/v2/sites/{siteId}]
+## Leave a site
 
 This requests the account specified by the Authorization token to leave the site.
-Once a account owner has left a site, they must be invited back in.
+Once an account owner has left a site, they must be invited back in.
 
 + Parameters
     + siteId: `a908` (string, required) - The ID of the site
@@ -234,18 +240,20 @@ Once a account owner has left a site, they must be invited back in.
 Invitation - *A request to invite a person to a site*. Sites are accessible by invite only.
 
 ## Send an invitation [POST /api/v2/invites]
+## Send an invitation
 
 Send an email invitation to join a site. This includes the security role for the individual 
 and a custom message from the sender, so the recipient knows it didn't originate from a robot.
 
-+ Attributes (Invite)
 + Request
+    + Attributes (Invite)
     + Headers
 
             Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200
 
 ## Review an invitation [GET /api/v2/invites/{inviteId}]
+## Review an invitation
 
 This is used by the person being invited as a way to see who invited them, and into which
 site they're being invited into.
@@ -259,6 +267,7 @@ the person being invited, or the person that created the invitation.
     + Attributes (Invite)
 
 ## Accept an invitation [PUT /api/v2/invites/{inviteId}]
+## Accept an invitation
 
 This is used by the person being invited upon accepting the invite. It creates the user
 account if necessary, and associates the account with the site.
@@ -268,13 +277,18 @@ the person being invited.
 
 Invitations that have not been accepted within a few days of creation will be invalidated.
 
-+ Attributes (Invite)
 + Parameters
     + inviteId: `some-long-uuid` (string, required) - The invite ID, generated during POST.
++ Request
+    + Attributes (Invite)
+    + Headers
+
+            Authorization: Basic eb4b8e6c-0e51-4f96-bec2-1e5b1a9b2009
 + Response 200 (application/json)
     + Attributes (Invite)
 
 ## Cancel an invitation [DELETE /api/v2/invites/{inviteId}]
+## Cancel an invitation
 
 This is used to cancel an existing inviation. It can be initiated by the person making
 the invitation, or by the person being invited as a way of canceling the invitation request.
@@ -302,11 +316,11 @@ the person being invited, or the person that created the invitation.
 ## Accounts (array [Account])
 
 ## UserRole (enum[number])
-+ `0` - Guest (custom authority)
-+ `1` - Monitor (read only)
-+ `2` - Controller (read and control)
-+ `3` - Admin (administer site)
-+ `4` - Owner (site owner)
++ 0 - Guest (custom authority)
++ 1 - Monitor (read only)
++ 2 - Controller (read and control)
++ 3 - Admin (administer site)
++ 4 - Owner (site owner)
 
 ## Site Summary (object)
 + id: `a908` (string)
@@ -320,9 +334,9 @@ the person being invited, or the person that created the invitation.
 + name: `Indoor Farm North` (string)
     Name given to the site by the site owner.
 + role (UserRole)
-    The primary role (owner, admin, controller, monitor, guest)
+    The primary role of the requester (0:guest, 1:monitor, 2:controller, 3:admin, 4:owner)
 + menu (array [Menu Item])
-    The list of menu items available for the requesting account.
+    The list of menu items available to the requester
 
 ## Menu Item (object)
 
@@ -357,7 +371,7 @@ the person being invited, or the person that created the invitation.
 + invitedBy: `Mary Maker` (string)
     Invitation created by. Provided for convenience on GET.
 + role (UserRole, required)
-    The security role of the account for this site.
+    The security role of the account for this site. (0:guest, 1:monitor, 2:controller, 3:admin, 4:owner)
 + firstName: `Johnny` (string, required)
     First name of the person being invited.
 + lastName: `Jones` (string)
