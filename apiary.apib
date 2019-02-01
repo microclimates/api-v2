@@ -132,7 +132,7 @@ id=some-resource-id&name=Resource%20Name
 Account - *Information associated with an individual that interacts with the system*
 
 ## Read an account profile [GET /api/v2/accounts/{accountId}]
-## Read an account profile <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-an-account-profile?console=1">Try it</a>
+## Read an account profile <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-an-account-profile?console=1">Try it</a>
 Returns the account profile for the specified ID. 
 
 + Parameters
@@ -145,7 +145,7 @@ Returns the account profile for the specified ID.
     + Attributes (Account)
 
 ## Read account profiles [GET /api/v2/accounts]
-## Read account profiles <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-account-profiles?console=1">Try it</a>
+## Read account profiles <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-account-profiles?console=1">Try it</a>
 
 Returns an array of account profiles. This will return a single account profile of the person making the request. It's useful if you have an Authorization token, but don't have the account ID.
 + Request
@@ -156,7 +156,7 @@ Returns an array of account profiles. This will return a single account profile 
     + Attributes (Accounts)
 
 ## Update an account profile [PUT /api/v2/accounts/{accountId}]
-## Update an account profile <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/update-an-account-profile?console=1">Try it</a>
+## Update an account profile <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/update-an-account-profile?console=1">Try it</a>
 
 Updates your account profile. Most attributes can be updated, but not all. The `body` can contain 
 a subset of attributes to update, or all attributes.
@@ -174,7 +174,7 @@ The resource /{accountId} must be the ID associated with the Authentication toke
     + Attributes (Account)
 
 ## Delete an account [DELETE /api/v2/accounts/{accountId}]
-## Delete an account <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/delete-an-account?console=1">Try it</a>
+## Delete an account <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/delete-an-account?console=1">Try it</a>
 
 **Be very careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your account id and
@@ -195,7 +195,7 @@ Site - *A physical installation with managed devices.* All sites are associated 
 also known as an *edge server*, responsible for managing devices, accounts, and security for the location.
 
 ## Read available sites [GET /api/v2/sites]
-## Read available sites <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/sites/read-available-sites?console=1">Try it</a>
+## Read available sites <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/sites/read-available-sites?console=1">Try it</a>
 
 Returns all sites authorized for the account, as specified in the Authorization token.
 
@@ -209,7 +209,7 @@ This request is served without directly contacting the site servers.
     + Attributes (array [Site Summary])
 
 ## Read site information [GET /api/v2/sites/{siteId}]
-## Read site information <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/sites/read-site-information?console=1">Try it</a>
+## Read site information <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/sites/read-site-information?console=1">Try it</a>
 
 Returns site details for the account. This request is made to the site server.
 
@@ -223,7 +223,7 @@ Returns site details for the account. This request is made to the site server.
     + Attributes (Site)
 
 ## Leave a site [DELETE /api/v2/sites/{siteId}]
-## Leave a site <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/sites/leave-a-site?console=1">Try it</a>
+## Leave a site <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/sites/leave-a-site?console=1">Try it</a>
 
 This requests the account specified by the Authorization token to leave the site.
 Once an account owner has left a site, they must be invited back in.
@@ -240,7 +240,7 @@ Once an account owner has left a site, they must be invited back in.
 Invitation - *A request to invite a person to a site*. Sites are accessible by invite only.
 
 ## Send an invitation [POST /api/v2/invites]
-## Send an invitation <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/send-an-invitation?console=1">Try it</a>
+## Send an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/send-an-invitation?console=1">Try it</a>
 
 Send an email invitation to join a site. This includes the security role for the individual 
 and a custom message from the sender, so the recipient knows it didn't originate from a robot.
@@ -253,7 +253,7 @@ and a custom message from the sender, so the recipient knows it didn't originate
 + Response 200
 
 ## Review an invitation [GET /api/v2/invites/{inviteId}]
-## Review an invitation <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/review-an-invitation?console=1">Try it</a>
+## Review an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/review-an-invitation?console=1">Try it</a>
 
 This is used by the person being invited as a way to see who invited them, and into which
 site they're being invited into.
@@ -267,7 +267,7 @@ the person being invited, or the person that created the invitation.
     + Attributes (Invite)
 
 ## Accept an invitation [PUT /api/v2/invites/{inviteId}]
-## Accept an invitation <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/accept-an-invitation?console=1">Try it</a>
+## Accept an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/accept-an-invitation?console=1">Try it</a>
 
 This is used by the person being invited upon accepting the invite. It creates the user
 account if necessary, and associates the account with the site.
@@ -288,7 +288,7 @@ Invitations that have not been accepted within a few days of creation will be in
     + Attributes (Invite)
 
 ## Cancel an invitation [DELETE /api/v2/invites/{inviteId}]
-## Cancel an invitation <a class="tryit hide" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/cancel-an-invitation?console=1">Try it</a>
+## Cancel an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/cancel-an-invitation?console=1">Try it</a>
 
 This is used to cancel an existing inviation. It can be initiated by the person making
 the invitation, or by the person being invited as a way of canceling the invitation request.
