@@ -240,7 +240,7 @@ Once an account owner has left a site, they must be invited back in.
 Invitation - *A request to invite a person to a site*. Sites are accessible by invite only.
 
 ## Send an invitation [POST /api/v2/invites]
-## Send an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/send-an-invitation?console=1">Try it</a>
+## Send an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invitations/send-an-invitation?console=1">Try it</a>
 
 Send an email invitation to join a site. This includes the security role for the individual 
 and a custom message from the sender, so the recipient knows it didn't originate from a robot.
@@ -253,7 +253,7 @@ and a custom message from the sender, so the recipient knows it didn't originate
 + Response 200
 
 ## Review an invitation [GET /api/v2/invites/{inviteId}]
-## Review an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/review-an-invitation?console=1">Try it</a>
+## Review an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invitations/review-an-invitation?console=1">Try it</a>
 
 This is used by the person being invited as a way to see who invited them, and into which
 site they're being invited into.
@@ -267,7 +267,7 @@ the person being invited, or the person that created the invitation.
     + Attributes (Invite)
 
 ## Accept an invitation [PUT /api/v2/invites/{inviteId}]
-## Accept an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/accept-an-invitation?console=1">Try it</a>
+## Accept an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invitations/accept-an-invitation?console=1">Try it</a>
 
 This is used by the person being invited upon accepting the invite. It creates the user
 account if necessary, and associates the account with the site.
@@ -288,7 +288,7 @@ Invitations that have not been accepted within a few days of creation will be in
     + Attributes (Invite)
 
 ## Cancel an invitation [DELETE /api/v2/invites/{inviteId}]
-## Cancel an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invites/cancel-an-invitation?console=1">Try it</a>
+## Cancel an invitation <a class="tryit hidden" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/invitations/cancel-an-invitation?console=1">Try it</a>
 
 This is used to cancel an existing inviation. It can be initiated by the person making
 the invitation, or by the person being invited as a way of canceling the invitation request.
