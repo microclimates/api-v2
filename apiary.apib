@@ -132,7 +132,7 @@ id=some-resource-id&name=Resource%20Name
 Account - *Information associated with an individual that interacts with the system*
 
 ## Read an account profile [GET /api/v2/accounts/{accountId}]
-## Read an account profile
+## Read an account profile <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-an-account-profile?console=1">Try it</a>
 Returns the account profile for the specified ID. 
 
 + Parameters
@@ -145,7 +145,7 @@ Returns the account profile for the specified ID.
     + Attributes (Account)
 
 ## Read account profiles [GET /api/v2/accounts]
-## Read account profiles
+## Read account profiles <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-account-profiles?console=1">Try it</a>
 
 Returns an array of account profiles. This will return a single account profile of the person making the request. It's useful if you have an Authorization token, but don't have the account ID.
 + Request
@@ -156,7 +156,7 @@ Returns an array of account profiles. This will return a single account profile 
     + Attributes (Accounts)
 
 ## Update an account profile [PUT /api/v2/accounts/{accountId}]
-## Update an account profile
+## Update an account profile <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/update-an-account-profile?console=1">Try it</a>
 
 Updates your account profile. Most attributes can be updated, but not all. The `body` can contain 
 a subset of attributes to update, or all attributes.
@@ -174,7 +174,7 @@ The resource /{accountId} must be the ID associated with the Authentication toke
     + Attributes (Account)
 
 ## Delete an account [DELETE /api/v2/accounts/{accountId}]
-## Delete an account
+## Delete an account <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/delete-an-account?console=1">Try it</a>
 
 **Be very careful with this one.** If you delete yourself, that will be the last API call you're
 able to make. You will be removed from all sites, and will have to be re-invited. Your account id and
@@ -195,7 +195,7 @@ Site - *A physical installation with managed devices.* All sites are associated 
 also known as an *edge server*, responsible for managing devices, accounts, and security for the location.
 
 ## Read available sites [GET /api/v2/sites]
-## Read available sites
+## Read available sites <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-available-sites?console=1">Try it</a>
 
 Returns all sites authorized for the account, as specified in the Authorization token.
 
@@ -209,7 +209,7 @@ This request is served without directly contacting the site servers.
     + Attributes (array [Site Summary])
 
 ## Read site information [GET /api/v2/sites/{siteId}]
-## Read site information
+## Read site information <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/read-site-information?console=1">Try it</a>
 
 Returns site details for the account. This request is made to the site server.
 
@@ -223,7 +223,7 @@ Returns site details for the account. This request is made to the site server.
     + Attributes (Site)
 
 ## Leave a site [DELETE /api/v2/sites/{siteId}]
-## Leave a site
+## Leave a site <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/leave-a-site?console=1">Try it</a>
 
 This requests the account specified by the Authorization token to leave the site.
 Once an account owner has left a site, they must be invited back in.
@@ -240,7 +240,7 @@ Once an account owner has left a site, they must be invited back in.
 Invitation - *A request to invite a person to a site*. Sites are accessible by invite only.
 
 ## Send an invitation [POST /api/v2/invites]
-## Send an invitation
+## Send an invitation<a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/send-an-invitation?console=1">Try it</a>
 
 Send an email invitation to join a site. This includes the security role for the individual 
 and a custom message from the sender, so the recipient knows it didn't originate from a robot.
@@ -253,7 +253,7 @@ and a custom message from the sender, so the recipient knows it didn't originate
 + Response 200
 
 ## Review an invitation [GET /api/v2/invites/{inviteId}]
-## Review an invitation
+## Review an invitation <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/review-an-invitation?console=1">Try it</a>
 
 This is used by the person being invited as a way to see who invited them, and into which
 site they're being invited into.
@@ -267,7 +267,7 @@ the person being invited, or the person that created the invitation.
     + Attributes (Invite)
 
 ## Accept an invitation [PUT /api/v2/invites/{inviteId}]
-## Accept an invitation
+## Accept an invitation <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/accept-an-invitation?console=1">Try it</a>
 
 This is used by the person being invited upon accepting the invite. It creates the user
 account if necessary, and associates the account with the site.
@@ -288,7 +288,7 @@ Invitations that have not been accepted within a few days of creation will be in
     + Attributes (Invite)
 
 ## Cancel an invitation [DELETE /api/v2/invites/{inviteId}]
-## Cancel an invitation
+## Cancel an invitation <a class="tryit" target="_blank" href="https://microclimates.docs.apiary.io/#reference/0/accounts/cancel-an-invitation?console=1">Try it</a>
 
 This is used to cancel an existing inviation. It can be initiated by the person making
 the invitation, or by the person being invited as a way of canceling the invitation request.
@@ -327,6 +327,8 @@ the person being invited, or the person that created the invitation.
     The unique identifier, to be used as siteId in site related API requests.
 + name: `Indoor Farm North` (string)
     Name given to the site by the site owner.
++ role: `2` (UserRole)
+    The users site security role (0:guest, 1:monitor, 2:controller, 3:admin, 4:owner)
 
 ## Site (object)
 + id: `a908` (string)
@@ -340,15 +342,15 @@ the person being invited, or the person that created the invitation.
 
 ## Menu Item (object)
 
-+ id: `location-1` (string, required)
++ id: `clone-room-one` (string, required)
     A unique identifier across all menu items
 + name: `Clone Room` (string, required)
     The menu item display name
 + icon: `location` (string)
     An icon name as enumerated in the [ionicons](https://ionicframework.com/docs/ionicons/) page.
-+ slug: `location` (string)
++ slug: `clone-room-one` (string)
     Required for **webpage** type menu items. This is the unique URL slug for the web page.
-+ url: `location` (string)
++ url: `https://my-site.com/clone-room-one` (string)
     Required for **webpage** type menu items. The URL to navigate to for this menu item.
 + hubId: `d8Je` (string)
     Required for **dashboard** type menu items. This is the site ID.

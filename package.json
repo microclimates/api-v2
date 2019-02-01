@@ -11,8 +11,7 @@
     "microclimates"
   ],
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "aglio": "^2.3.0"
   },
@@ -21,6 +20,7 @@
     "url": "http://github.com/microclimates/api-v2.git"
   },
   "scripts": {
-    "html": "scripts/gen-html.sh"
+    "html": "scripts/gen-html.sh",
+    "deploy": "scripts/deploy.sh"
   }
 }
